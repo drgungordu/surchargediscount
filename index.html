@@ -4,6 +4,30 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Surcharge Discount Manager</title>
+    
+    <!-- OAuth yönlendirme kodu -->
+    <script>
+      document.addEventListener("DOMContentLoaded", function() {
+        // URL parametrelerini al
+        const urlParams = new URLSearchParams(window.location.search);
+        const merchantId = urlParams.get('merchant_id');
+        const employeeId = urlParams.get('employee_id');
+        const clientId = urlParams.get('client_id');
+        const code = urlParams.get('code');
+        
+        // Tüm gerekli parametreler varsa, uygulamaya yönlendir
+        if (merchantId && employeeId && clientId && code) {
+          // Uygulamanıza deep link oluştur
+          const appUrl = `intent://drgungordu.github.io/surchargediscount?merchant_id=${merchantId}&employee_id=${employeeId}&client_id=${clientId}&code=${code}#Intent;scheme=https;package=com.example.surchargediscount;end`;
+          
+          // 1 saniye sonra yönlendir (sayfanın yüklenmesi için)
+          setTimeout(function() {
+            window.location.href = appUrl;
+          }, 1000);
+        }
+      });
+    </script>
+    
     <style>
         body {
             font-family: Arial, sans-serif;
